@@ -1,7 +1,9 @@
-<div class="container">
-    <ol class="tasks-list" *ngIf="day">
-        <li class="tasks-list__item" *ngFor="let task of day.tasks">
-            <p>{{task.name}}</p>
-        </li>
-    </ol>
+<div class="container"  *ngIf="day">
+    <div class="header">
+        <h1>{{day.name}}</h1>
+        <button>Create a new Task</button>
+    </div>
+    <section *ngFor="let task of day.tasks; let i = index">
+        <p>{{i+1}} - {{task.name}}</p>
+    </section>
 </div>

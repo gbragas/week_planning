@@ -1,8 +1,8 @@
 <ng-container *ngIf="vm$ | async as vm">
     <div class="container" *ngIf="vm.days as days; else loading">
-        <div *ngFor="let day of days">
-            <button (click)="changeCreatingTask()">Create a new task</button>
-            <app-day-card></app-day-card>
+        <div class="day" *ngFor="let day of days">
+            <button (click)="openCreateTask(day)">Create a new task</button>
+            <app-day-card [day]="day"></app-day-card>
         </div>
     </div>
 
@@ -13,6 +13,6 @@
 
 <app-popup *ngIf="creatingTask">
     <ng-container>
-        <button (click)="changeCreatingTask()">Close Popup</button>
+        <app-execute-tasks [day]="selectedDay" (newTask)="createTask(selectedDay, $event)" (cancel)="closeCreateTask()"></app-execute-tasks>
     </ng-container>
 </app-popup>

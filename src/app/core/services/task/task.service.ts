@@ -25,4 +25,10 @@ export class TaskService {
       this.http.get<Task[]>(`${this.baseUrl}/tasks`)
     );
   }
+
+  post(day: Day, task: Task) {
+    let request = day;
+    request.tasks = [...request.tasks, task]
+    return this.http.put<Task>(`${this.baseUrl}/days/${day.id}`, request)
+  }
 }

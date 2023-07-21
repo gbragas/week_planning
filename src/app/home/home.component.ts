@@ -3,6 +3,7 @@ import { DayService } from '../core/services/day/day.service';
 import { EMPTY, catchError, combineLatest, ignoreElements, of, startWith } from 'rxjs';
 import { Task } from '../core/models/task.model';
 import { TaskService } from '../core/services/task/task.service';
+import { Day } from '../core/models/day.model';
 
 @Component({
   selector: 'app-home',
@@ -10,6 +11,8 @@ import { TaskService } from '../core/services/task/task.service';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent {
+
+  selectedDay!: Day;
 
   creatingTask: boolean = false;
 
@@ -31,11 +34,20 @@ export class HomeComponent {
 
   constructor(private dayService: DayService, private taskService: TaskService) { }
 
-  changeCreatingTask() {
-    this.creatingTask = !this.creatingTask
+  openCreateTask(day: Day) {
+    this.selectedDay = day;
+    this.creatingTask = true;
   }
 
-  createTask(task: Task) {
+  closeCreateTask() {
+    this.creatingTask = false;
+  }
 
+  createTask(day: Day, task: Task) {
+    this.taskService.post(day, task).subscribe({
+      next: () => this.closeCreateTask(),
+      error: () => console.log('Deu erro')
+
+    })
   }
 }

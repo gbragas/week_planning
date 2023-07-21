@@ -32,6 +32,7 @@ export class ExecuteTasksComponent {
 
   createtask() {
     this.form.value.createdAt = new Date();
+    this.form.value.id = new Date().getTime();
     this.newTask.emit(this.form.value);
   }
 
