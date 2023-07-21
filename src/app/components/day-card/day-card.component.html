@@ -1,0 +1,7 @@
+<div class="container">
+    <ol class="tasks-list" *ngIf="day">
+        <li class="tasks-list__item" *ngFor="let task of day.tasks">
+            <p>{{task.name}}</p>
+        </li>
+    </ol>
+</div>

@@ -1,0 +1,18 @@
+<ng-container *ngIf="vm$ | async as vm">
+    <div class="container" *ngIf="vm.days as days; else loading">
+        <div *ngFor="let day of days">
+            <button (click)="changeCreatingTask()">Create a new task</button>
+            <app-day-card></app-day-card>
+        </div>
+    </div>
+
+    <ng-template #loading>
+        <h1>Carregando...</h1>
+    </ng-template>
+</ng-container>
+
+<app-popup *ngIf="creatingTask">
+    <ng-container>
+        <button (click)="changeCreatingTask()">Close Popup</button>
+    </ng-container>
+</app-popup>
